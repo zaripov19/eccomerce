@@ -21,7 +21,6 @@ public class BasketServlet extends HttpServlet {
         Optional<Product> first = DB.PRODUCTS.stream().filter(item -> item.getId().equals(productId)).findFirst();
         boolean isProductInBasket = DB.basket.keySet().stream()
                 .anyMatch(p -> p.getId().equals(productId));
-
         if (isProductInBasket) {
             DB.basket.remove(first.get().getId());
         } else {

@@ -104,12 +104,12 @@
                                 if (isProductInBasket) {
                             %>
                             <a class="btn btn-danger w-100"
-                               href="basketServlet?productId=<%=product.getId()%>&categoryId=<%=categoryId%>">Remove</a>
+                               href="/basket?productId=<%=product.getId()%>&categoryId=<%=categoryId%>">Remove</a>
                             <%
                             } else {
                             %>
                             <a class="btn btn-primary w-100"
-                               href="basketServlet?productId=<%=product.getId()%>&categoryId=<%=categoryId%>">Select</a>
+                               href="/basket?productId=<%=product.getId()%>&categoryId=<%=categoryId%>">Select</a>
                             <%
                                 }
                             %>

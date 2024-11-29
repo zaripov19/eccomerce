@@ -26,6 +26,6 @@ public interface DB {
     ));
 
 
-    Map<Product, Integer> basket = new HashMap<>();
+    public static Map<Product, Integer> basket = new HashMap<>();
 
 }
