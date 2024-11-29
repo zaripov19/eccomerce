@@ -1,3 +1,7 @@
+<%@ page import="com.example.demo.entity.Product" %>
+<%@ page import="com.example.demo.Database.DB" %>
+<%@ page import="com.example.demo.entity.Category" %>
+<%@ page import="static com.example.demo.Database.DB.basket" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -50,7 +54,7 @@
                     All
                 </button>
                 <%
-                    for (Category category : categories) {
+                    for (Category category : DB.CATEGORIES) {
                 %>
                 <button
                         name="categoryId"
@@ -81,7 +85,7 @@
                     String categoryIdParam = request.getParameter("categoryId");
                     int categoryId = (categoryIdParam != null) ? Integer.parseInt(categoryIdParam) : 0;
 
-                    for (Product product : products) {
+                    for (Product product : DB.PRODUCTS) {
                         if (categoryId == 0 || product.getCategoryId() == categoryId) {
                 %>
                 <div class="col-md-6 col-lg-4">
