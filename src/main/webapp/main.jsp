@@ -46,7 +46,7 @@
     <div class="row">
         <!-- Left Sidebar with Buttons -->
         <div class="col-md-3">
-            <form action="mainPage.jsp" method="get" class="button-panel">
+            <form action="main.jsp" method="get" class="button-panel">
                 <button
                         name="categoryId"
                         value="0"
