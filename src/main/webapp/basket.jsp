@@ -71,6 +71,25 @@
 </head>
 <body>
 <div class="container">
+    <%
+        String checkoutMessage = request.getParameter("checkout");
+        String errorMessage = request.getParameter("error");
+        if ("success".equals(checkoutMessage)) {
+    %>
+    <div class="alert alert-success text-center">
+        Checkout completed successfully! Your basket is now empty.
+    </div>
+    <%
+    } else if ("loginRequired".equals(errorMessage)) {
+    %>
+    <div class="alert alert-danger text-center">
+        Please log in to complete the checkout.
+    </div>
+    <%
+        }
+    %>
+
+    <!-- Basket Content -->
     <div class="basket-container">
         <h1 class="mb-4 text-center">Your Basket</h1>
         <%
@@ -94,12 +113,9 @@
                     <img src="/file/<%= product.getId() %>" alt="<%= product.getName() %>"
                          style="width: 70px; height: 70px;">
                     <div>
-                        <h5><%= product.getName() %>
-                        </h5>
-                        <p>Price: $<%= product.getPrice() %>
-                        </p>
-                        <p>Total: $<%= productTotal %>
-                        </p>
+                        <h5><%= product.getName() %></h5>
+                        <p>Price: $<%= product.getPrice() %></p>
+                        <p>Total: $<%= productTotal %></p>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
@@ -107,9 +123,7 @@
                         <form action="/basketquantityServlet" method="get">
                             <input type="hidden" name="productId" value="<%= product.getId() %>">
                             <input type="hidden" name="action" value="decrement">
-                            <button type="submit"
-                                    class="btn btn-outline-secondary" <%= quantity == 1 ? "disabled" : "" %>>-
-                            </button>
+                            <button type="submit" class="btn btn-outline-secondary" <%= quantity == 1 ? "disabled" : "" %>>-</button>
                         </form>
                         <span class="mx-3"><%= quantity %></span>
                         <form action="/basketquantityServlet" method="get">
@@ -118,8 +132,7 @@
                             <button type="submit" class="btn btn-outline-secondary">+</button>
                         </form>
                     </div>
-                    <a href="/basket?productId=<%= product.getId() %>&action=remove"
-                       class="btn btn-danger ms-3">Remove</a>
+                    <a href="/basket?productId=<%= product.getId() %>&action=remove" class="btn btn-danger ms-3">Remove</a>
                 </div>
             </div>
             <%
@@ -127,8 +140,7 @@
             %>
         </div>
         <div class="total-section mt-4">
-            <p>Total Price: $<%= totalPrice %>
-            </p>
+            <p>Total Price: $<%= totalPrice %></p>
         </div>
         <div class="checkout-button mt-3">
             <form action="/checkout" method="post">

@@ -71,13 +71,18 @@
         <!-- Products Section -->
         <div class="col-md-9">
             <!-- Basket Button -->
-            <div class="basket-btn">
+            <!-- Basket and Login Buttons -->
+            <div class="basket-btn d-flex align-items-center">
+                <!-- Login Button -->
+                <a class="btn btn-warning me-2" href="login.jsp">Login</a>
+                <!-- Basket Button -->
                 <form action="basket.jsp" method="get">
                     <input type="hidden" name="categoryId"
                            value="<%= request.getParameter("categoryId") != null ? request.getParameter("categoryId") : "0" %>">
                     <button class="btn btn-success btn-lg">Basket</button>
                 </form>
             </div>
+
 
             <!-- Product List -->
             <div class="row g-4">
