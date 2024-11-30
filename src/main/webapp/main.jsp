@@ -1,3 +1,7 @@
+<%@ page import="com.example.demo.entity.Product" %>
+<%@ page import="com.example.demo.Database.DB" %>
+<%@ page import="com.example.demo.entity.Category" %>
+<%@ page import="static com.example.demo.Database.DB.basket" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -42,7 +46,7 @@
     <div class="row">
         <!-- Left Sidebar with Buttons -->
         <div class="col-md-3">
-            <form action="mainPage.jsp" method="get" class="button-panel">
+            <form action="main.jsp" method="get" class="button-panel">
                 <button
                         name="categoryId"
                         value="0"
@@ -50,7 +54,7 @@
                     All
                 </button>
                 <%
-                    for (Category category : categories) {
+                    for (Category category : DB.CATEGORIES) {
                 %>
                 <button
                         name="categoryId"
@@ -67,7 +71,11 @@
         <!-- Products Section -->
         <div class="col-md-9">
             <!-- Basket Button -->
-            <div class="basket-btn">
+            <!-- Basket and Login Buttons -->
+            <div class="basket-btn d-flex align-items-center">
+                <!-- Login Button -->
+                <a class="btn btn-warning me-2" href="login.jsp">Login</a>
+                <!-- Basket Button -->
                 <form action="basket.jsp" method="get">
                     <input type="hidden" name="categoryId"
                            value="<%= request.getParameter("categoryId") != null ? request.getParameter("categoryId") : "0" %>">
@@ -75,13 +83,14 @@
                 </form>
             </div>
 
+
             <!-- Product List -->
             <div class="row g-4">
                 <%
                     String categoryIdParam = request.getParameter("categoryId");
                     int categoryId = (categoryIdParam != null) ? Integer.parseInt(categoryIdParam) : 0;
 
-                    for (Product product : products) {
+                    for (Product product : DB.PRODUCTS) {
                         if (categoryId == 0 || product.getCategoryId() == categoryId) {
                 %>
                 <div class="col-md-6 col-lg-4">
@@ -100,16 +109,17 @@
                                 if (isProductInBasket) {
                             %>
                             <a class="btn btn-danger w-100"
-                               href="basketServlet?productId=<%=product.getId()%>&categoryId=<%=categoryId%>">Remove</a>
+                               href="/basket?productId=<%=product.getId()%>&categoryId=<%=categoryId%>&action=remove">Remove</a>
                             <%
                             } else {
                             %>
                             <a class="btn btn-primary w-100"
-                               href="basketServlet?productId=<%=product.getId()%>&categoryId=<%=categoryId%>">Select</a>
+                               href="/basket?productId=<%=product.getId()%>&categoryId=<%=categoryId%>&action=select">Select</a>
                             <%
                                 }
                             %>
                         </div>
+
                     </div>
                 </div>
                 <%
